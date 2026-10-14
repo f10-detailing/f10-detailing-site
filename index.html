@@ -1,503 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>F10 Detailing — Revenue from cars already in your bay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F10 Detailing | Commercial detailing & steam cleaning for panel beaters and buildings</title>
+<meta name="description" content="B2B car detailing for panel beaters, plus carpet, upholstery and mattress steam cleaning and yearly laundry maintenance for buildings. Trade accounts only. $5M public liability.">
+<link rel="canonical" href="https://f10-detailing.com.au/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="F10 Detailing | Commercial detailing & steam cleaning for panel beaters and buildings">
+<meta property="og:description" content="B2B car detailing for panel beaters, plus carpet, upholstery and mattress steam cleaning and yearly laundry maintenance for buildings. Trade accounts only. $5M public liability.">
+<meta property="og:url" content="https://f10-detailing.com.au/">
+<meta name="theme-color" content="#15191d">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#eef1f4;
-    --ink-dim:#8f99a8;
-    --bg:#12151a;
-    --bg-panel:#181c23;
-    --navy:#1b2740;
-    --navy-2:#233252;
-    --steel:#4d7fb5;
-    --lime:#c8ff3d;
-    --lime-dim:#8fb32a;
-    --hairline:#2a2f38;
-    --radius:2px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Manrope',sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  h1,h2,h3,.disp{
-    font-family:'Oswald',sans-serif;
-    text-transform:uppercase;
-    letter-spacing:0.01em;
-    font-weight:600;
-    line-height:1.05;
-  }
-  .mono{font-family:'JetBrains Mono',monospace;}
-  a{color:inherit;text-decoration:none;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
-  :focus-visible{outline:2px solid var(--lime);outline-offset:3px;}
-
-  /* ---------- top ticker ---------- */
-  .ticker{
-    background:var(--lime);
-    color:#0e1005;
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:.06em;
-    padding:7px 0;
-    overflow:hidden;
-    white-space:nowrap;
-  }
-  .ticker-inner{display:inline-block;animation:scroll 26s linear infinite;}
-  .ticker span{margin-right:48px;}
-  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-  @media (prefers-reduced-motion: reduce){.ticker-inner{animation:none;}}
-
-  /* ---------- nav ---------- */
-  header{
-    position:sticky;top:0;z-index:40;
-    background:rgba(18,21,26,0.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--hairline);
-  }
-  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
-  .logo{display:flex;align-items:center;gap:10px;font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;letter-spacing:.02em;}
-  .logo .mark{
-    width:30px;height:30px;position:relative;flex:none;
-  }
-  .logo .mark svg{width:100%;height:100%;}
-  .logo b{color:var(--lime);}
-  nav ul{display:flex;gap:34px;list-style:none;}
-  nav ul a{font-size:14px;font-weight:600;color:var(--ink-dim);transition:color .15s;}
-  nav ul a:hover{color:var(--ink);}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    background:var(--lime);color:#0e1005;
-    font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.03em;
-    font-size:13px;padding:12px 22px;border-radius:var(--radius);border:none;cursor:pointer;
-    transition:transform .15s, box-shadow .15s;
-  }
-  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(200,255,61,0.25);}
-  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--hairline);}
-  .btn.ghost:hover{border-color:var(--ink-dim);box-shadow:none;}
-
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative;
-    padding:110px 0 90px;
-    background:
-      radial-gradient(ellipse 900px 500px at 82% -10%, rgba(77,127,181,0.22), transparent 60%),
-      linear-gradient(180deg, var(--bg) 0%, #0f1116 100%);
-    border-bottom:1px solid var(--hairline);
-    overflow:hidden;
-  }
-  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:10px;
-    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--lime);
-    letter-spacing:.08em;margin-bottom:22px;
-  }
-  .eyebrow::before{content:"";width:8px;height:8px;background:var(--lime);display:inline-block;border-radius:1px;}
-  .hero h1{font-size:clamp(38px,5.4vw,64px);color:var(--ink);}
-  .hero h1 .hl{color:var(--lime);}
-  .hero p.lead{
-    margin-top:24px;color:var(--ink-dim);font-size:18px;max-width:520px;
-  }
-  .hero-cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;}
-
-  /* bay visual */
-  .bay{
-    position:relative;background:var(--bg-panel);border:1px solid var(--hairline);
-    border-radius:4px;padding:26px;min-height:340px;
-  }
-  .bay-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-dim);letter-spacing:.08em;display:flex;justify-content:space-between;margin-bottom:18px;}
-  .bay-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);display:inline-block;margin-right:6px;box-shadow:0 0 8px var(--lime);animation:pulse 2s infinite;}
-  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
-  .stall{
-    border:1px dashed var(--hairline);border-radius:3px;padding:18px 16px;margin-bottom:12px;
-    display:flex;align-items:center;justify-content:space-between;
-    background:var(--navy);
-  }
-  .stall .car-tag{font-size:13px;font-weight:700;color:var(--ink);font-family:'Oswald',sans-serif;letter-spacing:.02em;}
-  .stall .status{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-dim);}
-  .stall .rev{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--lime);font-weight:600;}
-  .stall.idle .rev{color:var(--ink-dim);}
-  .bay-total{
-    display:flex;justify-content:space-between;align-items:baseline;
-    border-top:1px solid var(--hairline);padding-top:16px;margin-top:6px;
-  }
-  .bay-total .label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-dim);letter-spacing:.06em;}
-  .bay-total .num{font-family:'JetBrains Mono',monospace;font-size:28px;color:var(--lime);font-weight:600;}
-
-  /* ---------- section shell ---------- */
-  section{padding:96px 0;border-bottom:1px solid var(--hairline);}
-  .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--steel);letter-spacing:.1em;margin-bottom:14px;}
-  .sec-head{max-width:640px;margin-bottom:56px;}
-  .sec-head h2{font-size:clamp(28px,3.4vw,40px);}
-  .sec-head p{color:var(--ink-dim);margin-top:16px;font-size:16px;}
-
-  /* ---------- value grid ---------- */
-  .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);}
-  .value-card{background:var(--bg-panel);padding:34px 30px;}
-  .value-card .num{font-family:'JetBrains Mono',monospace;color:var(--steel);font-size:13px;margin-bottom:16px;}
-  .value-card h3{font-size:19px;color:var(--ink);margin-bottom:12px;letter-spacing:0;}
-  .value-card p{color:var(--ink-dim);font-size:14.5px;}
-
-  /* ---------- models ---------- */
-  .models{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-  .model-card{
-    border:1px solid var(--hairline);background:var(--bg-panel);border-radius:3px;padding:34px;
-    display:flex;flex-direction:column;gap:16px;position:relative;
-  }
-  .model-card.feature{border-color:var(--lime);}
-  .model-card .tag{
-    position:absolute;top:-1px;right:24px;background:var(--lime);color:#0e1005;
-    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;padding:5px 10px;
-    border-radius:0 0 3px 3px;font-weight:600;
-  }
-  .model-card h3{font-size:21px;color:var(--ink);}
-  .model-card .who{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--steel);}
-  .model-card ul{list-style:none;margin-top:6px;}
-  .model-card li{
-    font-size:14.5px;color:var(--ink-dim);padding-left:20px;position:relative;margin-bottom:10px;
-  }
-  .model-card li::before{content:"—";position:absolute;left:0;color:var(--steel);}
-  .model-card .comm{
-    margin-top:auto;padding-top:18px;border-top:1px solid var(--hairline);
-    display:flex;justify-content:space-between;align-items:baseline;
-  }
-  .model-card .comm .cnum{font-family:'JetBrains Mono',monospace;font-size:30px;color:var(--lime);font-weight:600;}
-  .model-card .comm .clabel{font-size:12px;color:var(--ink-dim);text-align:right;max-width:140px;}
-
-  /* ---------- touchpoints ---------- */
-  .tp-rail{display:flex;overflow-x:auto;gap:1px;background:var(--hairline);border:1px solid var(--hairline);scrollbar-width:thin;}
-  .tp{
-    flex:1 0 240px;background:var(--bg-panel);padding:30px 26px;position:relative;transition:background .2s;
-  }
-  .tp:hover{background:var(--navy);}
-  .tp .idx{font-family:'JetBrains Mono',monospace;color:var(--lime);font-size:13px;margin-bottom:22px;display:block;}
-  .tp h3{font-size:16px;color:var(--ink);margin-bottom:10px;letter-spacing:0;text-transform:none;font-family:'Manrope',sans-serif;font-weight:700;}
-  .tp p{font-size:13.5px;color:var(--ink-dim);}
-  .tp-line{position:absolute;left:0;top:0;height:2px;width:0;background:var(--lime);transition:width .3s;}
-  .tp:hover .tp-line{width:100%;}
-
-  /* ---------- proof / case study ---------- */
-  .proof{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;}
-  .proof-card{
-    background:var(--navy);border:1px solid var(--navy-2);border-radius:4px;padding:36px;
-  }
-  .proof-card .shop{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--steel);letter-spacing:.06em;margin-bottom:6px;}
-  .proof-card .name{font-family:'Oswald',sans-serif;font-size:24px;color:var(--ink);margin-bottom:22px;}
-  .metric-row{display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--navy-2);}
-  .metric-row:first-of-type{border-top:none;}
-  .metric-row .m-label{font-size:13.5px;color:var(--ink-dim);}
-  .metric-row .m-val{font-family:'JetBrains Mono',monospace;color:var(--lime);font-weight:600;}
-  .proof-copy p{color:var(--ink-dim);margin-bottom:16px;font-size:16px;}
-  .proof-copy blockquote{
-    font-family:'Oswald',sans-serif;font-size:22px;color:var(--ink);font-weight:500;
-    border-left:3px solid var(--lime);padding-left:20px;margin:26px 0;line-height:1.3;
-  }
-  .proof-copy .cite{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-dim);}
-
-  /* ---------- pricing strip ---------- */
-  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .price-card{border:1px solid var(--hairline);padding:28px;border-radius:3px;background:var(--bg-panel);}
-  .price-card.hi{border-color:var(--lime);}
-  .price-card .ptitle{font-family:'Oswald',sans-serif;font-size:16px;color:var(--ink);margin-bottom:14px;}
-  .price-card .plist{list-style:none;font-size:13px;color:var(--ink-dim);margin-bottom:20px;}
-  .price-card .plist li{margin-bottom:6px;padding-left:14px;position:relative;}
-  .price-card .plist li::before{content:"·";position:absolute;left:0;color:var(--steel);}
-  .price-card .pnum{font-family:'JetBrains Mono',monospace;font-size:22px;color:var(--lime);}
-  .price-card .pnum small{font-size:12px;color:var(--ink-dim);}
-
-  /* ---------- cta ---------- */
-  .cta-band{
-    background:linear-gradient(135deg, var(--navy) 0%, #0f1116 100%);
-    border-bottom:none;padding:100px 0;
-  }
-  .cta-inner{display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;}
-  .cta-inner h2{font-size:clamp(30px,4vw,46px);max-width:560px;}
-  .cta-inner .sub{color:var(--ink-dim);margin-top:14px;max-width:480px;}
-  .cta-form{display:flex;gap:10px;flex-wrap:wrap;}
-  .cta-form input{
-    background:var(--bg-panel);border:1px solid var(--hairline);color:var(--ink);
-    padding:14px 16px;font-family:'Manrope',sans-serif;font-size:14px;border-radius:2px;min-width:230px;
-  }
-  .cta-form input:focus{outline:none;border-color:var(--lime);}
-
-  footer{padding:44px 0;}
-  .foot-row{display:flex;justify-content:space-between;align-items:center;color:var(--ink-dim);font-size:13px;flex-wrap:wrap;gap:16px;}
-  .foot-row .logo{font-size:16px;}
-
-  @media (max-width:860px){
-    .hero-grid,.proof,.models,.cta-inner{grid-template-columns:1fr;}
-    .value-grid,.price-grid{grid-template-columns:1fr;}
-    nav ul{display:none;}
-    .tp{flex:1 0 78%;}
-  }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="ticker"><div class="ticker-inner">
-  <span>ZERO TOUCH LABOUR — YOU FIX, WE DETAIL</span>
-  <span>LOW POWER · WATER · AND DRAIN USE VS. AVERAGE</span>
-  <span>CARS NEVER LEAVE YOUR LOT</span>
-  <span>$5M PUBLIC LIABILITY COVER</span>
-  <span>FREE WHITE-LABEL MARKETING — WE DESIGN & PRINT</span>
-  <span>ZERO TOUCH LABOUR — YOU FIX, WE DETAIL</span>
-  <span>LOW POWER · WATER · AND DRAIN USE VS. AVERAGE</span>
-  <span>CARS NEVER LEAVE YOUR LOT</span>
-  <span>$5M PUBLIC LIABILITY COVER</span>
-  <span>FREE WHITE-LABEL MARKETING — WE DESIGN & PRINT</span>
+<a class="skip" href="#main">Skip to content</a>
+<div class="topbar"><div class="wrap">
+  <span class="b2b">Trade &amp; commercial accounts only<span class="hide-sm"> · Melbourne</span></span>
+  <a href="tel:+61420264998">0420 264 998</a>
 </div></div>
-
-<header>
-  <div class="wrap">
-    <nav>
-      <div class="logo">
-        <span class="mark">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 6 L92 24 V56 C92 78 72 90 50 96 C28 90 8 78 8 56 V24 Z" stroke="#c8ff3d" stroke-width="4"/>
-            <path d="M28 58 C36 40 44 34 50 34 C56 34 64 40 72 58" stroke="#4d7fb5" stroke-width="4" fill="none" stroke-linecap="round"/>
-          </svg>
-        </span>
-        F10 <b>Detailing</b>
-      </div>
-      <ul>
-        <li><a href="#value">Why it works</a></li>
-        <li><a href="#models">Partnership models</a></li>
-        <li><a href="#touchpoints">The system</a></li>
-        <li><a href="#proof">Results</a></li>
-      </ul>
-      <a href="#cta" class="btn ghost">Get started</a>
-    </nav>
-  </div>
-</header>
-
+<header class="site"><div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="index.html" aria-label="F10 Detailing home"><span class="mark">F10</span>Detailing</a>
+    <ul>
+      <li><a href="index.html" aria-current="page">Home</a></li>
+      <li><a href="panel-beaters.html">Panel beaters</a></li>
+      <li><a href="buildings.html">Buildings</a></li>
+      <li><a href="how-we-work.html">How we work</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn" href="contact.html">Request a quote</a>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </nav>
+</div></header>
+<main id="main">
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow">B2B PARTNERSHIP PROGRAM — PANEL BEATERS &amp; AUTO REPAIR</div>
-      <h1>Every car sitting in<br>your bay is either<br>costing you nothing<span class="hl"> or earning you money.</span></h1>
-      <p class="lead">F10 Detailing is the marketing and sales engine that turns idle repair time into a second revenue line — without your team lifting a finger. We build the demand, run the pitch, and detail the car. You keep the margin.</p>
+      <div class="eyebrow">B2B cleaning &amp; detailing · Melbourne</div>
+      <h1>We clean what your customers and residents <em>notice first.</em></h1>
+      <p class="lead">F10 Detailing works for businesses, not households. We detail cars on-site for panel beaters, and steam clean carpets, upholstery, mattresses and shared laundries for buildings. You get one trained, insured crew and one invoice.</p>
       <div class="hero-cta">
-        <a href="#cta" class="btn">Get your bay assessed →</a>
-        <a href="#models" class="btn ghost">See the two models</a>
+        <a class="btn" href="contact.html">Request a quote</a>
+        <a class="btn secondary" href="tel:+61420264998">Call 0420 264 998</a>
+      </div>
+      <div class="hero-facts">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>$5M public liability</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Trained, uniformed contractors</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M9 17h1M14 17h1"/></svg>Trade accounts only</span>
       </div>
     </div>
-    <div class="bay">
-      <div class="bay-label"><span><span class="bay-dot"></span>LIVE BAY, TASMAN CHECKPOINT AUTOBODY</span><span>TODAY</span></div>
-      <div class="stall idle">
-        <div><div class="car-tag">BAY 01 — SEDAN, INSURANCE REPAIR</div><div class="status">Awaiting parts · 3 days on site</div></div>
-        <div class="rev">$0 extra</div>
+
+    <div class="panel" aria-label="What we do">
+      <div class="panel-head"><span class="live">Service menu</span><span>Who it's for</span></div>
+      <div class="row">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17h14M6 17l1.5-6h9L18 17M7.5 11 9 7h6l1.5 4"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></svg></span>
+        <div class="grow"><div class="t">Car interior detailing</div><div class="s">On-site, while the car is in for repair</div></div>
+        <span class="v">Workshops</span>
       </div>
-      <div class="stall">
-        <div><div class="car-tag">BAY 02 — SUV, PANEL REPAIR</div><div class="status">Fix&amp;Shine — Interior Reset added</div></div>
-        <div class="rev">+$205</div>
+      <div class="row">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18v-6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v6M2 18h20M6 9V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg></span>
+        <div class="grow"><div class="t">Carpet, upholstery &amp; mattress steam cleaning</div><div class="s">Common areas and furnished units</div></div>
+        <span class="v">Buildings</span>
       </div>
-      <div class="stall">
-        <div><div class="car-tag">BAY 03 — SEDAN, QUOTE APPROVED</div><div class="status">Fix&amp;Shine — Showroom Overhaul added</div></div>
-        <div class="rev">+$215</div>
+      <div class="row">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M8 6h.01M11 6h.01"/></svg></span>
+        <div class="grow"><div class="t">Yearly laundry maintenance</div><div class="s">Shared laundry rooms, once a year</div></div>
+        <span class="v">Buildings</span>
       </div>
-      <div class="bay-total">
-        <span class="label">EXTRA REVENUE, THIS BAY, THIS WEEK</span>
-        <span class="num">$420+</span>
-      </div>
+      <div class="panel-foot"><span>Booked through one account</span><b>1 crew</b></div>
     </div>
   </div>
 </section>
 
-<section id="value">
+<section class="alt">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">WHY WORKSHOPS PARTNER WITH US</div>
-      <h2>You already have the customer.<br>We just monetise the wait.</h2>
-      <p>A car sitting in your bay for repairs is a captive, paying-attention customer for the one window nobody else is selling to. We built F10 Detailing to capture that window on your behalf — as your marketing department, not another vendor asking for shelf space.</p>
+      <div class="kicker">Who we work with</div>
+      <h2>Two kinds of clients. One standard of work.</h2>
+      <p>We only take commercial work, so our scheduling, insurance and reporting are set up for businesses, not one-off household jobs.</p>
     </div>
-    <div class="value-grid">
-      <div class="value-card">
-        <div class="num">01 / ZERO TOUCH LABOUR</div>
-        <h3>You fix, we detail</h3>
-        <p>Our contracted detailers handle every job. Your technicians never touch a vacuum or a chemical — repair work keeps moving exactly as it does today.</p>
-      </div>
-      <div class="value-card">
-        <div class="num">02 / LEAN ON-SITE FOOTPRINT</div>
-        <h3>Less power, water &amp; drain use than average</h3>
-        <p>The service is built to run lighter than a typical on-site detail — lower electrical draw, lower water use, less demand on your drains. It sits alongside your existing workflow with minimal impact on your utilities.</p>
-      </div>
-      <div class="value-card">
-        <div class="num">03 / ZERO TRANSIT RISK</div>
-        <h3>The car never leaves your lot</h3>
-        <p>No handover, no off-site liability, no chain-of-custody risk on a customer's vehicle. Everything happens inside your own fence line.</p>
-      </div>
-      <div class="value-card">
-        <div class="num">04 / PASSIVE MARGIN</div>
-        <h3>Wholesale in, retail out</h3>
-        <p>You buy the service at a fixed B2B rate and price it to the customer yourself, or take a straight commission — either way, the spread is yours.</p>
-      </div>
-      <div class="value-card">
-        <div class="num">05 / CUSTOMER SATISFACTION</div>
-        <h3>They get their day back</h3>
-        <p>A customer without a car for hours is a customer counting the cost of a taxi and a lost afternoon. Offering detailing on-site turns an inconvenience into a favour you did them.</p>
-      </div>
-      <div class="value-card">
-        <div class="num">06 / FULLY INSURED</div>
-        <h3>$5M public liability</h3>
-        <p>Every contractor and every job is covered before a single vehicle is touched. Your insurer's questions are already answered.</p>
-      </div>
+    <div class="grid-2">
+      <a class="sector a" href="panel-beaters.html">
+        <span class="tag">Panel beaters &amp; auto repair</span>
+        <h3>Turn bay time into a second revenue line.</h3>
+        <p>Your customer's car is already sitting in your bay. We detail it on-site while it waits, and you keep the margin or the commission.</p>
+        <ul class="ticks">
+          <li>Your technicians never touch a vacuum</li>
+          <li>The car never leaves your lot</li>
+          <li>Signage designed and printed for you, free</li>
+        </ul>
+        <span class="go">For workshops</span>
+      </a>
+      <a class="sector b" href="buildings.html">
+        <span class="tag">Buildings, strata &amp; property</span>
+        <h3>Carpets, furniture, mattresses and laundries, on one plan.</h3>
+        <p>For building managers, owners corporations, property managers and furnished-apartment operators who need it done properly and on schedule.</p>
+        <ul class="ticks">
+          <li>Hot water extraction steam cleaning</li>
+          <li>Yearly shared-laundry maintenance visit</li>
+          <li>Scheduled around residents and tenants</li>
+        </ul>
+        <span class="go">For buildings</span>
+      </a>
     </div>
   </div>
 </section>
 
-<section id="models">
+<section>
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">TWO WAYS TO RUN IT</div>
-      <h2>Choose how visible we are —<br>and how the money moves.</h2>
-      <p>Both models are free to set up. Pick the one that matches how much you want your customers to see us versus you.</p>
+      <div class="kicker">Services</div>
+      <h2>What we clean.</h2>
     </div>
-    <div class="models">
-      <div class="model-card">
-        <div class="who">MODEL A</div>
-        <h3>Invisible Subcontractor</h3>
-        <ul>
-          <li>Full branding uses your logo, your signage, your front desk</li>
-          <li>You collect the payment directly from the customer</li>
-          <li>We invoice you at wholesale per completed job</li>
-          <li>Your shop's look and feel stays untouched — customers trust a name they already know</li>
-        </ul>
-        <div class="comm">
-          <span class="cnum">100%</span>
-          <span class="clabel">of the customer-facing brand stays yours</span>
-        </div>
-      </div>
-      <div class="model-card feature">
-        <div class="tag">MOST POPULAR</div>
-        <div class="who">MODEL B</div>
-        <h3>Trusted Partner</h3>
-        <ul>
-          <li>Co-branded or F10 Detailing-branded signage — we supply the payment terminal</li>
-          <li>You earn a straight commission on every sale, no invoicing admin</li>
-          <li>No logistics overhead on your side — we run the transaction end to end</li>
-          <li>Best for shops that want the upside with zero admin load</li>
-        </ul>
-        <div class="comm">
-          <span class="cnum">10–15%</span>
-          <span class="clabel">commission per sale, negotiable by volume</span>
-        </div>
-      </div>
+    <div class="grid-3">
+      <article class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17h14M6 17l1.5-6h9L18 17M7.5 11 9 7h6l1.5 4"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></svg></span>
+        <h3>Car detailing for workshops</h3>
+        <p>Three interior tiers, from a quick refresh to a full hot water extraction, done in your bay while the repair is underway.</p>
+        <a class="link-arrow" href="panel-beaters.html">Workshop programme</a>
+      </article>
+      <article class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18v-6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v6M2 18h20M6 9V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg></span>
+        <h3>Steam cleaning</h3>
+        <p>Carpet, upholstery and mattresses in lobbies, corridors, common rooms and furnished units, including between tenancies.</p>
+        <a class="link-arrow" href="buildings.html#steam">Steam cleaning</a>
+      </article>
+      <article class="card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M8 6h.01M11 6h.01"/></svg></span>
+        <h3>Yearly laundry maintenance</h3>
+        <p>One deep-clean visit a year for shared laundry rooms: machines, lint areas, tubs and floors, with a note of anything that needs a technician.</p>
+        <a class="link-arrow" href="buildings.html#laundry">Laundry maintenance</a>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="touchpoints">
+<section class="dark">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">THE FIX &amp; SHINE SYSTEM</div>
-      <h2>A four-touchpoint journey that<br>sells itself before anyone asks.</h2>
-      <p>Customers don't walk in planning to buy detailing. We designed a sequence that meets them at drop-off, primes them at the door, converts them at the desk, and rewards them on the way out — using nothing but signage we design, print, and place for free.</p>
+      <div class="kicker">Why F10</div>
+      <h2>A system, not just a cleaner.</h2>
+      <p>Every F10 contractor is vetted, trained in the same workflow and checked on the job, so the result is the same whichever crew turns up.</p>
     </div>
-    <div class="tp-rail">
-      <div class="tp"><div class="tp-line"></div><span class="idx">01</span><h3>Drop-off poster</h3><p>A high-contrast poster reframes the wait itself — no extra time, no extra trip, just a question that makes the offer obvious.</p></div>
-      <div class="tp"><div class="tp-line"></div><span class="idx">02</span><h3>Floor &amp; door graphic</h3><p>A decal points the way to enquire, signalling that this is a real, in-demand service — not an afterthought.</p></div>
-      <div class="tp"><div class="tp-line"></div><span class="idx">03</span><h3>Front desk menu</h3><p>Benefit-led pricing tiers position the service as restoring order for a customer who's already stressed about the repair.</p></div>
-      <div class="tp"><div class="tp-line"></div><span class="idx">04</span><h3>Waiting-area voucher</h3><p>A small reward near the seating area turns "yes" into a win the customer feels good about, not a spend they second-guess.</p></div>
+    <div class="stats">
+      <div class="stat"><b>$5M</b><span>Public liability cover on every job</span></div>
+      <div class="stat"><b>Vetted</b><span>Interview and hands-on skills assessment before any client work</span></div>
+      <div class="stat"><b>Trained</b><span>Every contractor follows the same F10 checklist and workflow</span></div>
+      <div class="stat"><b>Checked</b><span>Random spot checks and client feedback after jobs</span></div>
     </div>
+    <p style="margin-top:28px"><a class="btn secondary" href="how-we-work.html">How we work</a></p>
   </div>
 </section>
 
-<section id="proof">
-  <div class="wrap proof">
-    <div class="proof-card">
-      <div class="shop">CURRENT PARTNER — BRUNSWICK VIC</div>
-      <div class="name">Tasman Checkpoint Autobody</div>
-      <div class="metric-row"><span class="m-label">Model running</span><span class="m-val">Invisible Subcontractor</span></div>
-      <div class="metric-row"><span class="m-label">Service branded as</span><span class="m-val">Fix&amp;Shine</span></div>
-      <div class="metric-row"><span class="m-label">Entry tier (sedan / SUV)</span><span class="m-val">$75 / $85</span></div>
-      <div class="metric-row"><span class="m-label">Top tier (sedan / SUV)</span><span class="m-val">$215 / $235</span></div>
-      <div class="metric-row"><span class="m-label">Touchpoints live</span><span class="m-val">4 of 4</span></div>
-    </div>
-    <div class="proof-copy">
-      <blockquote>"Ask the front desk to add it to your service today."</blockquote>
-      <p>That's the entire close. It sits on a poster at drop-off, a decal on the assessment bay wall, and a menu stand at the front desk — no script, no upsell training, no pressure from staff who are busy running the repair side of the business.</p>
-      <p>The workshop doesn't detail a single car. They point a customer toward a sign, and a contracted detailer handles the rest inside a bay the car was already sitting in.</p>
-      <div class="cite">Onboarding, branding, and print production: 4 weeks, at no cost to the partner.</div>
-    </div>
-  </div>
-</section>
 
-<section id="pricing">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">WHAT THE CUSTOMER SEES</div>
-      <h2>Simple tiers, sold on the spot.</h2>
-      <p>Every tier builds on the one before it — nothing to explain, nothing to compare against competitors who aren't there.</p>
-    </div>
-    <div class="price-grid">
-      <div class="price-card">
-        <div class="ptitle">The Quick Refresh</div>
-        <ul class="plist">
-          <li>Quick interior vacuum</li>
-          <li>Dashboard wipe-down</li>
-          <li>Glass cleaning</li>
-        </ul>
-        <div class="pnum">$75 <small>/ $85 SUV</small></div>
-      </div>
-      <div class="price-card">
-        <div class="ptitle">The Interior Reset</div>
-        <ul class="plist">
-          <li>Everything in the Refresh, plus</li>
-          <li>Full crevice cleaning</li>
-          <li>Fabric &amp; leather conditioning</li>
-          <li>Odor neutralization</li>
-        </ul>
-        <div class="pnum">$185 <small>/ $205 SUV</small></div>
-      </div>
-      <div class="price-card hi">
-        <div class="ptitle">The Showroom Steam Overhaul</div>
-        <ul class="plist">
-          <li>Everything in the Reset, plus</li>
-          <li>Full hot water extraction</li>
-          <li>Heavy stain remediation</li>
-          <li>Free bonus: fabric/leather ceramic coating</li>
-        </ul>
-        <div class="pnum">$215 <small>/ $235 SUV</small></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cta-band" id="cta" style="border-bottom:none;">
-  <div class="wrap cta-inner">
+<section class="contact" id="quote">
+  <div class="wrap contact-grid">
     <div>
-      <div class="kicker">NO COST TO SET UP</div>
-      <h2>Let's see what your bay is worth.</h2>
-      <p class="sub">Send us your workshop details and we'll come back with a realistic revenue estimate for your bay, plus which model fits your team better.</p>
+      <div class="kicker">Trade accounts</div>
+      <h2>Tell us about your site.</h2>
+      <p class="sub">Send a few details and we'll call you back to book a walk-through and put together a quote. There's no cost and no lock-in to find out.</p>
+      <ul class="contact-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><a href="tel:+61420264998">0420 264 998</a></li>
+      </ul>
     </div>
-    <form class="cta-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Request received ✓';">
-      <input type="text" placeholder="Workshop name" required>
-      <input type="tel" placeholder="Phone number" required>
-      <button type="submit" class="btn">Send</button>
+    <form class="form" data-enquiry>
+      <label>Business name<input name="business" autocomplete="organization" required></label>
+      <label>Your name<input name="name" autocomplete="name" required></label>
+      <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email"></label>
+      <label>I'm enquiring for
+        <select name="sector">
+          <option>A panel beater / auto repair workshop</option>
+          <option>A building / strata / property portfolio</option>
+          <option>Something else (commercial)</option>
+        </select>
+      </label>
+      <label>Suburb<input name="suburb" autocomplete="address-level2"></label>
+      <label class="wide">What do you need?<textarea name="message" placeholder="e.g. 3 bays, mostly insurance repairs · or · 40-unit building, carpet in corridors and two shared laundries"></textarea></label>
+      <div class="hp" aria-hidden="true"><label>Leave blank<input name="botcheck" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn wide" type="submit">Send enquiry</button>
+      <p class="form-status wide" role="status" aria-live="polite"></p>
+      <p class="small wide">Business enquiries only. We don't take private household bookings.</p>
     </form>
   </div>
 </section>
-
-<footer>
-  <div class="wrap foot-row">
-    <div class="logo">F10 Detailing</div>
-    <div>B2B car detailing &amp; finishing partnerships for panel beaters and auto repair · Fully insured, $5M public liability</div>
-    <div>Call to get started · 0420 264 998</div>
+</main>
+<footer class="site"><div class="wrap">
+  <div class="foot">
+    <div>
+      <a class="brand" href="index.html"><span class="mark">F10</span>Detailing</a>
+      <p>Commercial car detailing for panel beaters, and steam cleaning and laundry maintenance for buildings. Fully insured, $5M public liability.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="panel-beaters.html">Car detailing for workshops</a></li>
+        <li><a href="buildings.html#steam">Carpet, upholstery &amp; mattress steam cleaning</a></li>
+        <li><a href="buildings.html#laundry">Yearly laundry maintenance</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="how-we-work.html">How we work</a></li>
+        <li><a href="contact.html">Request a quote</a></li>
+        <li><a href="tel:+61420264998">0420 264 998</a></li>
+      </ul>
+    </div>
   </div>
-</footer>
-
+  <div class="foot-base"><span>© 2026 F10 Detailing</span><span>B2B only: workshops, strata, property &amp; facility managers</span></div>
+</div></footer>
+<script src="site.js" defer></script>
 </body>
 </html>
