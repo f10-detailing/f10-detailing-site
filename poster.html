@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laundry Clean Poster | F10 Detailing</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Print on A4. Open poster.html?b=<building-slug>&week=<text>, then Ctrl+P. */
+  @page{size:A4;margin:0;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;color:#121619;background:#d9dee2;}
+  .sheet{width:210mm;min-height:297mm;margin:16px auto;background:#fff;display:flex;flex-direction:column;overflow:hidden;}
+  .top{background:#15191d;color:#f1f3f5;padding:16mm 16mm 12mm;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;}
+  .mark{width:40px;height:40px;border-radius:10px;background:#ff5a1f;color:#121619;display:grid;place-items:center;font-weight:900;font-size:16px;}
+  h1{font-family:'Archivo',sans-serif;font-weight:900;font-size:46pt;line-height:1.02;margin-top:12mm;letter-spacing:-.02em;}
+  h1 span{color:#ff5a1f;}
+  .sub{font-size:16pt;color:#a3adb5;margin-top:6mm;}
+  .mid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10mm;padding:14mm 16mm;align-items:center;}
+  .qr{border:3mm solid #ff5a1f;border-radius:6mm;padding:4mm;background:#fff;}
+  .qr img{display:block;width:100%;}
+  .scan{text-align:center;font-weight:700;font-size:13pt;margin-top:4mm;}
+  ul{list-style:none;display:grid;gap:5mm;font-size:14pt;}
+  li{padding-left:9mm;position:relative;}
+  li::before{content:"✓";position:absolute;left:0;color:#0e8a83;font-weight:800;}
+  .prices{margin-top:8mm;display:grid;gap:2mm;font-size:13pt;}
+  .prices div{display:flex;justify-content:space-between;border-bottom:1px solid #d9dee2;padding:2mm 0;}
+  .prices b{font-family:'Archivo',sans-serif;}
+  .week{background:#eef1f3;padding:8mm 16mm;font-size:15pt;}
+  .week b{font-family:'Archivo',sans-serif;font-size:20pt;display:block;margin-top:1mm;}
+  .foot{padding:6mm 16mm 10mm;font-size:11pt;color:#646d75;display:flex;justify-content:space-between;}
+  @media print{body{background:#fff;}.sheet{margin:0;}}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="top">
+    <div class="brand"><span class="mark">F10</span>Detailing</div>
+    <h1>Is your washing machine <span>actually clean?</span></h1>
+    <p class="sub">Your building's yearly laundry clean is coming up. Book your time in two minutes.</p>
+  </div>
+  <div class="mid">
+    <div>
+      <div class="qr"><img id="qr" src="qr/book.svg" alt="QR code to book your laundry clean"></div>
+      <p class="scan">Scan with your phone camera to book</p>
+    </div>
+    <div>
+      <ul>
+        <li>Washer: drum, seal, drawer &amp; filter deep clean</li>
+        <li>Dryer: lint filter &amp; housing cleaned</li>
+        <li>Done in your laundry, at a time you choose</li>
+        <li>Uniformed, insured F10 team</li>
+      </ul>
+      <div class="prices" id="prices"></div>
+    </div>
+  </div>
+  <div class="week" id="weekBox"><span>Service week for your building</span><b id="week">See booking page for dates</b></div>
+  <div class="foot"><span>Questions? 0420 264 998</span><span id="url">f10-detailing.com.au/book</span></div>
+</div>
+<script src="book-config.js"></script>
+<script>
+  var q = new URLSearchParams(location.search), b = q.get('b');
+  if (b && /^[a-z0-9-]+$/.test(b)) {
+    var img = document.getElementById('qr');
+    img.onerror = function () { img.onerror = null; img.src = 'qr/book.svg'; };
+    img.src = 'qr/' + b + '.svg';
+  }
+  if (q.get('week')) document.getElementById('week').textContent = q.get('week');
+  document.getElementById('prices').innerHTML = window.F10_BOOKING.products.filter(function (p) { return p.price != null; })
+    .map(function (p) { return '<div><span>' + p.name + '</span><b>$' + p.price + '</b></div>'; }).join('');
+</script>
+</body>
+</html>

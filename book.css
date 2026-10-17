@@ -1,0 +1,89 @@
+/* Resident booking flow */
+.book .nav{min-height:64px;}
+.book-call{font-weight:700;text-decoration:none;font-size:15px;}
+.book-main{max-width:860px;padding-top:40px;padding-bottom:72px;}
+.book-head h1{font-size:clamp(32px,5vw,48px);}
+.book-head .lead{margin-top:14px;color:var(--ink-2);font-size:18px;max-width:620px;}
+.demo-banner{background:#fff4e5;border:1px solid #ffd59e;color:#7a4300;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600;margin-bottom:24px;}
+
+.stepper{list-style:none;display:flex;gap:6px;margin:32px 0 28px;counter-reset:st;flex-wrap:wrap;}
+.stepper li{counter-increment:st;flex:1 1 0;min-width:90px;font-size:13px;font-weight:700;color:var(--muted);padding-top:12px;border-top:4px solid var(--line);}
+.stepper li::before{content:counter(st) ". ";}
+.stepper li.on{color:var(--ink);border-top-color:var(--accent);}
+.stepper li.done{color:var(--ink-2);border-top-color:var(--teal);}
+
+.step{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:28px;}
+.step h2{font-size:24px;margin-bottom:18px;}
+.step h3{font-size:18px;margin-bottom:8px;}
+.field{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700;color:var(--ink-2);}
+.field .opt{font-weight:500;color:var(--muted);}
+.field input,.field select,.field textarea{font:inherit;font-size:16px;font-weight:400;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:13px 14px;width:100%;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,138,131,.18);}
+.field input[aria-invalid="true"]{border-color:#c62828;}
+.hint{font-size:14px;color:var(--muted);margin-top:12px;}
+.hint a{color:var(--teal);font-weight:600;}
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap;}
+.actions .btn:only-child{margin-left:auto;}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* calendar */
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);margin-bottom:14px;}
+.legend .k::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;}
+.legend .available::before{background:#e3f4f2;border:1px solid var(--teal);}
+.legend .taken::before{background:#ffe9e0;border:1px solid #f0a988;}
+.legend .blocked::before{background:#eceef0;border:1px solid #c9ced3;}
+.cal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;}
+.day h4{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;text-align:center;margin-bottom:8px;color:var(--ink-2);}
+.day h4 small{display:block;font-weight:500;color:var(--muted);}
+.slot{display:block;width:100%;margin-bottom:8px;padding:12px 6px;border-radius:10px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;text-align:center;line-height:1.25;}
+.slot small{display:block;font-size:11px;font-weight:600;margin-top:2px;}
+.slot.available{background:#e3f4f2;border:1px solid var(--teal);color:#08534f;}
+.slot.taken{background:#ffe9e0;border:1px solid #f0a988;color:#8a3412;}
+.slot.blocked{background:#eceef0;border:1px solid #c9ced3;color:#5b636b;}
+.slot:hover{filter:brightness(.97);}
+.slot[aria-pressed="true"]{outline:3px solid var(--accent);outline-offset:1px;}
+.cal-empty{grid-column:1 / -1;color:var(--muted);}
+.enquiry{margin-top:22px;padding:20px;border-radius:12px;background:#fff6f2;border:1px solid #f6c3ad;}
+.enquiry p{font-size:15px;color:var(--ink-2);margin-bottom:14px;}
+
+/* products */
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.product{position:relative;text-align:left;border:2px solid var(--line);border-radius:14px;padding:20px;background:var(--white);cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;gap:10px;}
+.product:hover{border-color:#b9c1c8;}
+.product[aria-checked="true"]{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,90,31,.15);}
+.product .pname{font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;line-height:1.2;}
+.product .pprice{font-family:'Archivo',sans-serif;font-weight:800;font-size:30px;}
+.product ul{list-style:none;display:grid;gap:6px;font-size:13.5px;color:var(--ink-2);}
+.product li::before{content:"✓ ";color:var(--teal);font-weight:700;}
+.product .best{position:absolute;top:-11px;right:14px;background:var(--accent);color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:999px;}
+
+/* details + summary */
+.details{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.details .wide{grid-column:1 / -1;}
+.summary{display:grid;grid-template-columns:auto 1fr;gap:10px 20px;font-size:15px;margin-bottom:20px;}
+.summary dt{color:var(--muted);}
+.summary dd{font-weight:600;}
+.summary .total{font-family:'Archivo',sans-serif;font-size:22px;}
+.agree{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink-2);margin-top:12px;cursor:pointer;}
+.agree input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--accent);}
+.agree a{color:var(--teal);font-weight:600;}
+.form-error{color:#c62828;font-size:14px;font-weight:600;margin-top:12px;}
+.form-error:empty{display:none;}
+
+.done{text-align:center;}
+.done-ic{width:64px;height:64px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:32px;margin:0 auto 16px;}
+.done p{color:var(--ink-2);max-width:520px;margin:0 auto 18px;}
+.book-foot{padding:24px 0;}
+.book-foot .foot-base{margin-top:0;border-top:none;padding-top:0;}
+
+@media (max-width:720px){
+  .step{padding:20px 16px;}
+  .cal{grid-template-columns:1fr;gap:4px;}
+  .day{display:grid;grid-template-columns:76px 1fr 1fr;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);}
+  .day h4{text-align:left;margin:0;grid-row:span 2;}
+  .slot{margin:0;padding:10px 4px;font-size:13px;}
+  .products,.details{grid-template-columns:1fr;}
+  .stepper li{font-size:0;min-width:0;}
+  .stepper li::before{font-size:13px;}
+  .stepper li.on{font-size:13px;flex:3 1 0;}
+}

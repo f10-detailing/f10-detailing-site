@@ -273,3 +273,11 @@ footer.site{background:#0d1013;color:var(--on-dark-dim);padding:56px 0 36px;font
   .foot{grid-template-columns:1fr;}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+
+/* ---------- terms ---------- */
+.terms-body{max-width:780px;}
+.terms-body h2{font-size:22px;margin:36px 0 12px;}
+.terms-body h2:first-child{margin-top:0;}
+.terms-body p,.terms-body li{color:var(--ink-2);font-size:16px;}
+.terms-body ul{padding-left:20px;display:grid;gap:10px;}
+.terms-body a{color:var(--teal);font-weight:600;}

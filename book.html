@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book your laundry clean | F10 Detailing</title>
+<meta name="description" content="Residents: book your building's yearly washing machine and dryer clean with F10 Detailing.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#15191d">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="book.css">
+</head>
+<body class="book">
+<header class="site"><div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="index.html" aria-label="F10 Detailing home"><span class="mark">F10</span>Detailing</a>
+    <a class="book-call" href="tel:+61420264998">Questions? 0420 264 998</a>
+  </nav>
+</div></header>
+
+<main id="main" class="wrap book-main">
+  <div class="demo-banner" id="demo" hidden>Demo mode: sample buildings and times. Nothing is saved or charged.</div>
+
+  <div class="book-head">
+    <div class="eyebrow">Residents · yearly laundry clean</div>
+    <h1>Book your washer &amp; dryer clean</h1>
+    <p class="lead">Your building has a service week booked with F10. Choose a time, tell us how to reach you, and pay online.</p>
+  </div>
+
+  <ol class="stepper" id="stepper" aria-label="Booking steps">
+    <li data-s="1">Building</li><li data-s="2">Time</li><li data-s="3">Service</li><li data-s="4">Your details</li><li data-s="5">Confirm</li>
+  </ol>
+
+  <!-- 1. Building -->
+  <section class="step" data-step="1">
+    <h2>1. Your building</h2>
+    <label class="field">Building address and service week
+      <select id="week" required><option value="">Loading buildings…</option></select>
+    </label>
+    <p class="hint">Can't see your building? Your building manager may not have booked a service week yet. Call us on <a href="tel:+61420264998">0420 264 998</a>.</p>
+    <div class="actions"><button class="btn" type="button" data-next="2" id="to2" disabled>Choose a time</button></div>
+  </section>
+
+  <!-- 2. Time -->
+  <section class="step" data-step="2" hidden>
+    <h2>2. Pick a time</h2>
+    <div class="legend"><span class="k available">Available</span><span class="k taken">Booked</span><span class="k blocked">Unavailable</span></div>
+    <div class="cal" id="cal" role="grid" aria-label="Available times"></div>
+    <div class="enquiry" id="enquiry" hidden>
+      <h3>This time is already taken</h3>
+      <p>You can still ask for it. We'll try to add an extra worker and let you know whether we can fit you in. If we can't, we'll book your second choice instead, so please pick one from the available times.</p>
+      <label class="field">Your second choice (available times only)
+        <select id="second"><option value="">Choose an available time…</option></select>
+      </label>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" type="button" data-back="1">Back</button>
+      <button class="btn" type="button" data-next="3" id="to3" disabled>Continue</button>
+    </div>
+  </section>
+
+  <!-- 3. Service -->
+  <section class="step" data-step="3" hidden>
+    <h2>3. Choose your service</h2>
+    <div class="products" id="products" role="radiogroup" aria-label="Service"></div>
+    <div class="actions">
+      <button class="btn secondary" type="button" data-back="2">Back</button>
+      <button class="btn" type="button" data-next="4" id="to4" disabled>Continue</button>
+    </div>
+  </section>
+
+  <!-- 4. Details -->
+  <section class="step" data-step="4" hidden>
+    <h2>4. Your details</h2>
+    <form id="details" class="details" novalidate>
+      <label class="field">Full name<input name="name" autocomplete="name" required></label>
+      <label class="field">Unit / apartment number<input name="unit" required placeholder="e.g. Unit 304"></label>
+      <label class="field">Mobile<input name="phone" type="tel" autocomplete="tel" required></label>
+      <label class="field">Backup phone <span class="opt">(someone we can call if you're not home)</span><input name="backup_phone" type="tel"></label>
+      <label class="field wide">Email <span class="opt">(for your receipt and confirmation)</span><input name="email" type="email" autocomplete="email" required></label>
+      <label class="field wide">Access notes <span class="opt">(keys with concierge, pets, intercom, where the laundry is)</span><textarea name="access_notes" rows="3"></textarea></label>
+    </form>
+    <div class="actions">
+      <button class="btn secondary" type="button" data-back="3">Back</button>
+      <button class="btn" type="button" id="to5">Review booking</button>
+    </div>
+  </section>
+
+  <!-- 5. Confirm -->
+  <section class="step" data-step="5" hidden>
+    <h2>5. Check and confirm</h2>
+    <dl class="summary" id="summary"></dl>
+    <label class="agree"><input type="checkbox" id="agree"> <span>I have read and agree to the <a href="resident-terms.html" target="_blank" rel="noopener">Resident Service Terms</a>, including letting F10 into my home at the booked time, or arranging access as described in my notes.</span></label>
+    <label class="agree"><input type="checkbox" id="agree2"> <span>I'm the resident (or authorised by the resident) and 18 or over.</span></label>
+    <p class="form-error" id="err" role="alert"></p>
+    <div class="actions">
+      <button class="btn secondary" type="button" data-back="4">Back</button>
+      <button class="btn" type="button" id="submit" disabled>Continue to payment</button>
+    </div>
+    <p class="hint" id="payhint">Payment is taken securely by Stripe. Your time is held for 30 minutes while you pay.</p>
+  </section>
+
+  <!-- Done -->
+  <section class="step done" data-step="6" hidden>
+    <div class="done-ic" aria-hidden="true">✓</div>
+    <h2 id="doneTitle">Request received</h2>
+    <p id="doneText"></p>
+    <p><a class="btn secondary" href="book.html">Make another booking</a></p>
+  </section>
+</main>
+
+<footer class="site book-foot"><div class="wrap foot-base">
+  <span>© F10 Detailing · <a href="resident-terms.html">Resident Service Terms</a></span>
+  <span><a href="tel:+61420264998">0420 264 998</a></span>
+</div></footer>
+
+<script src="book-config.js"></script>
+<script src="book.js" defer></script>
+</body>
+</html>
