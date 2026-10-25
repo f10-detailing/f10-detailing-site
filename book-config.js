@@ -11,7 +11,7 @@ window.F10_BOOKING = {
   termsVersion: '2026-10-18-draft',
   phone: '0420 264 998',
 
-  // price: number in AUD inc. GST, or null = "price to be confirmed"
+  // price: number in AUD (F10 not GST-registered as of Oct 2026), or null = "price to be confirmed"
   products: [
     {
       id: 'washer',
