@@ -2,7 +2,7 @@
 // Until appsScriptUrl is set, the page runs in DEMO mode with sample data and saves nothing.
 window.F10_BOOKING = {
   // Web app URL of the F10 Bookings Google Apps Script (ends in /exec). Bookings land in the Google Sheet.
-  appsScriptUrl: '',
+  appsScriptUrl: 'https://script.google.com/macros/s/AKfycbyFNFaX3HNSzGg85JoDpeDRt2FhvnH2rbML6lvaH9bH5azkO9U9K7HlxIU_AWiS6bs8/exec',
 
   // Stripe Payment Links (one per product). Created in the F10 Stripe dashboard.
   // The page adds ?client_reference_id=<booking id>&prefilled_email=<email> automatically.
