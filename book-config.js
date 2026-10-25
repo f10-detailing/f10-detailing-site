@@ -1,8 +1,8 @@
 // F10 resident booking — settings.
-// Until supabaseUrl/supabaseAnonKey are set, the page runs in DEMO mode with sample data and saves nothing.
+// Until appsScriptUrl is set, the page runs in DEMO mode with sample data and saves nothing.
 window.F10_BOOKING = {
-  supabaseUrl: '',
-  supabaseAnonKey: '',
+  // Web app URL of the F10 Bookings Google Apps Script (ends in /exec). Bookings land in the Google Sheet.
+  appsScriptUrl: '',
 
   // Stripe Payment Links (one per product). Created in the F10 Stripe dashboard.
   // The page adds ?client_reference_id=<booking id>&prefilled_email=<email> automatically.

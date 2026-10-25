@@ -1,27 +1,18 @@
 // F10 resident booking flow
 (function () {
   var C = window.F10_BOOKING;
-  var LIVE = !!(C.supabaseUrl && C.supabaseAnonKey);
+  var LIVE = !!C.appsScriptUrl;
   var TZ = 'Australia/Melbourne';
   var $ = function (s) { return document.querySelector(s); };
   var state = { weekId: '', weekLabel: '', slots: [], slot: null, second: null, product: null, details: {} };
 
   // ---------- data layer ----------
-  function rest(path, opts) {
-    opts = opts || {};
-    return fetch(C.supabaseUrl + '/rest/v1/' + path, {
-      method: opts.method || 'GET',
-      headers: {
-        apikey: C.supabaseAnonKey,
-        Authorization: 'Bearer ' + C.supabaseAnonKey,
-        'Content-Type': 'application/json',
-      },
-      body: opts.body ? JSON.stringify(opts.body) : undefined,
-    }).then(function (r) {
-      return r.json().then(function (j) {
-        if (!r.ok) throw new Error(j.message || 'Request failed');
-        return j;
-      });
+  // Google Apps Script backend. POST uses text/plain so the browser doesn't send a CORS preflight.
+  function api(query, body) {
+    var opts = body ? { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) } : {};
+    return fetch(C.appsScriptUrl + (query ? '?' + query : ''), opts).then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.error) throw new Error(j.error);
+      return j;
     });
   }
 
@@ -58,27 +49,21 @@
       var d = w.week_start, pad = function (n) { return String(n).padStart(2, '0'); };
       return { id: w.id, slug: w.slug, name: w.name, address: w.address, week_start: d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) };
     }));
-    var today = new Date().toISOString().slice(0, 10);
-    return rest('service_weeks?select=id,week_start,label,buildings!inner(slug,name,address,active)&active=eq.true&week_start=gte.' +
-      new Date(Date.now() - 6 * 864e5).toISOString().slice(0, 10) + '&order=week_start').then(function (rows) {
-      return rows.filter(function (r) { return r.buildings.active; }).map(function (r) {
-        return { id: r.id, slug: r.buildings.slug, name: r.buildings.name, address: r.buildings.address, week_start: r.week_start };
-      });
-    });
+    return api('action=weeks');
   }
   function loadSlots(weekId) {
     if (!LIVE) return Promise.resolve(demo.slots(weekId));
-    return rest('rpc/public_slots', { method: 'POST', body: { p_week: weekId } });
+    return api('action=slots&week=' + encodeURIComponent(weekId));
   }
   function createBooking() {
     var d = state.details;
     var payload = {
-      p_slot: state.slot.id, p_second: state.second ? state.second.id : null, p_product: state.product.id,
-      p_name: d.name, p_unit: d.unit, p_phone: d.phone, p_backup_phone: d.backup_phone || null,
-      p_email: d.email, p_access_notes: d.access_notes || null, p_terms_version: C.termsVersion,
+      slot_id: state.slot.id, second_slot_id: state.second ? state.second.id : '', product: state.product.id,
+      full_name: d.name, unit: d.unit, phone: d.phone, backup_phone: d.backup_phone || '',
+      email: d.email, access_notes: d.access_notes || '', terms_version: C.termsVersion,
     };
     if (!LIVE) return new Promise(function (r) { setTimeout(function () { r('demo-' + Date.now()); }, 400); });
-    return rest('rpc/create_booking', { method: 'POST', body: payload });
+    return api('', payload).then(function (j) { return j.id; });
   }
 
   // ---------- formatting ----------
