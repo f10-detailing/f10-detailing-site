@@ -15,12 +15,10 @@
   });
 })();
 
-// Enquiry form.
-// Set WEB3FORMS_KEY to a Web3Forms access key registered to the F10 inbox
-// (free at web3forms.com) and enquiries will be emailed there.
-// Until a key is set, the form hands the enquiry to the visitor's SMS app
-// addressed to the F10 mobile, so no enquiry is silently lost.
-var WEB3FORMS_KEY = '';
+// Enquiry (quote request) form → F10 Google Sheet "Enquiries" tab + email to F10.
+// If the sheet can't be reached, the visitor is offered a text message or call instead,
+// so no enquiry is silently lost.
+var F10_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyFNFaX3HNSzGg85JoDpeDRt2FhvnH2rbML6lvaH9bH5azkO9U9K7HlxIU_AWiS6bs8/exec';
 var F10_MOBILE = '+61420264998';
 
 document.querySelectorAll('form[data-enquiry]').forEach(function (form) {
@@ -30,44 +28,30 @@ document.querySelectorAll('form[data-enquiry]').forEach(function (form) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (form.querySelector('.hp input').value) return; // bot
+    if (!form.reportValidity()) return;
 
     var data = new FormData(form);
-    var lines = [
-      'F10 enquiry',
-      'Business: ' + (data.get('business') || ''),
-      'Contact: ' + (data.get('name') || ''),
-      'Phone: ' + (data.get('phone') || ''),
-      'Email: ' + (data.get('email') || ''),
-      'Type: ' + (data.get('sector') || ''),
-      'Suburb: ' + (data.get('suburb') || ''),
-      'Notes: ' + (data.get('message') || '')
-    ];
-
-    if (!WEB3FORMS_KEY) {
-      var href = 'sms:' + F10_MOBILE + '?&body=' + encodeURIComponent(lines.join('\n'));
-      status.innerHTML = 'Opening your messages app to send this to us. If nothing opens, ' +
-        '<a href="' + href + '">tap here to text it</a> or call <a href="tel:' + F10_MOBILE + '">0420 264 998</a>.';
-      window.location.href = href;
-      return;
-    }
+    var payload = { type: 'enquiry', page: location.pathname };
+    ['business', 'name', 'phone', 'email', 'sector', 'suburb', 'message'].forEach(function (k) { payload[k] = data.get(k) || ''; });
 
     button.disabled = true;
     button.textContent = 'Sending…';
-    data.append('access_key', WEB3FORMS_KEY);
-    data.append('subject', 'F10 website enquiry: ' + (data.get('business') || 'new lead'));
-    data.delete('botcheck');
-    fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+    status.textContent = '';
+    fetch(F10_SHEET_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json(); })
       .then(function (res) {
-        if (!res.success) throw new Error(res.message || 'failed');
+        if (!res || res.error || !res.id) throw new Error((res && res.error) || 'failed');
         form.reset();
         button.textContent = 'Request received ✓';
         status.textContent = "Thanks, we've got it. We'll call you back shortly.";
       })
       .catch(function () {
+        var text = 'F10 enquiry\nBusiness: ' + payload.business + '\nContact: ' + payload.name + '\nPhone: ' + payload.phone +
+          '\nEmail: ' + payload.email + '\nType: ' + payload.sector + '\nSuburb: ' + payload.suburb + '\nNotes: ' + payload.message;
         button.disabled = false;
         button.textContent = 'Send enquiry';
-        status.innerHTML = 'That didn\'t send. Please call <a href="tel:' + F10_MOBILE + '">0420 264 998</a>.';
+        status.innerHTML = 'Sorry, that didn’t go through. Please <a href="sms:' + F10_MOBILE + '?&body=' + encodeURIComponent(text) +
+          '">text it to us</a> or call <a href="tel:' + F10_MOBILE + '">0420 264 998</a>.';
       });
   });
 });
