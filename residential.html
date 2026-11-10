@@ -49,7 +49,7 @@
       <h1>Your home, cleaned and organised the F10 way.</h1>
       <p class="lead">A curated method that combines tidying, cleaning and organising, so your home doesn't just look clean for a day, it stays easy to live in.</p>
       <div class="hero-cta">
-        <a class="btn" href="#quote">Get a free quote</a>
+        <button type="button" class="btn quote-btn" data-service="">Get a free quote</button>
         <a class="call-link" href="tel:+61420264998"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>0420 264 998</a>
       </div>
     </div>
@@ -71,6 +71,7 @@
           <h3>Tidying &amp; cleaning</h3>
           <p class="from">Free quote</p>
           <p>We tidy and declutter first, then clean top to bottom: dusting, wipe-down, kitchen, bathrooms and floors.</p>
+          <button type="button" class="btn quote-btn" data-service="Tidying & cleaning">Get a free quote</button>
         </div>
       </article>
       <article class="svc-card" id="organising">
@@ -80,6 +81,7 @@
           <h3>Home organiser</h3>
           <p class="from">Free quote</p>
           <p>Kitchen, pantry, laundry, storage and kids' spaces: we sort, group and set up a simple system you can keep up.</p>
+          <button type="button" class="btn quote-btn" data-service="Home organiser">Get a free quote</button>
         </div>
       </article>
       <article class="svc-card">
@@ -89,6 +91,7 @@
           <h3>Wardrobe organiser</h3>
           <p class="from">Free quote</p>
           <p>We sort, fold and hang by type and season, so you can see what you own and find it in seconds.</p>
+          <button type="button" class="btn quote-btn" data-service="Wardrobe organiser">Get a free quote</button>
         </div>
       </article>
       <article class="svc-card">
@@ -98,6 +101,7 @@
           <h3>End of lease</h3>
           <p class="from">Free quote</p>
           <p>A thorough clean before you hand back the keys: kitchen, bathrooms, inside cupboards, skirting, windows and floors.</p>
+          <button type="button" class="btn quote-btn" data-service="End of lease">Get a free quote</button>
         </div>
       </article>
       <article class="svc-card">
@@ -107,6 +111,7 @@
           <h3>Steam cleaning</h3>
           <p class="from">Free quote</p>
           <p>Hot water extraction for carpets, couches, upholstery and mattresses, lifting dirt and odours a surface clean can't.</p>
+          <button type="button" class="btn quote-btn" data-service="Steam cleaning">Get a free quote</button>
         </div>
       </article>
       <article class="svc-card">
@@ -151,7 +156,7 @@
       <li>Free quote first</li>
       <li>Final walk-through</li>
     </ul>
-    <a class="btn" href="#quote">Get a free quote</a>
+    <button type="button" class="btn quote-btn" data-service="">Get a free quote</button>
   </div>
 </section>
 
@@ -206,6 +211,45 @@
     </form>
   </div>
 </section>
+
+<dialog class="quote-dialog" id="res-quote" aria-labelledby="rq-title">
+  <form class="form" data-enquiry data-dialog>
+    <div class="wide dlg-head">
+      <h2 id="rq-title">Get a free quote</h2>
+      <button type="button" class="dlg-close" aria-label="Close" data-close>×</button>
+    </div>
+    <p class="wide small" style="margin-top:-6px">Tell us about the job and we'll come back with a price. No obligation.</p>
+    <label class="wide">Service
+      <select name="sector" required>
+        <option value="">Choose a service…</option>
+        <option>Residential: Tidying &amp; cleaning</option>
+        <option>Residential: Home organiser</option>
+        <option>Residential: Wardrobe organiser</option>
+        <option>Residential: End of lease</option>
+        <option>Residential: Steam cleaning</option>
+        <option>Residential: A combination of these</option>
+      </select>
+    </label>
+    <label>Suburb<input name="suburb" autocomplete="address-level2" required placeholder="e.g. Fitzroy"></label>
+    <label>Property type
+      <select data-extra="Property">
+        <option value="">Choose…</option><option>Apartment / unit</option><option>Townhouse</option><option>House</option><option>Shared / communal areas only</option>
+      </select>
+    </label>
+    <label>Bedrooms<select data-extra="Bedrooms"><option value="">–</option><option>0 / studio</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></label>
+    <label>Bathrooms<select data-extra="Bathrooms"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></label>
+    <label>Kitchens<select data-extra="Kitchens"><option value="">–</option><option>1</option><option>2</option><option>3+</option></select></label>
+    <label>Preferred timing<input data-extra="Timing" placeholder="e.g. next week, weekday mornings"></label>
+    <label class="wide">Describe the job<textarea name="message" required placeholder="e.g. Only communal areas, 1 kitchen, 2 bathrooms. Carpet in the hallway needs steam cleaning."></textarea></label>
+    <label>Your name<input name="name" autocomplete="name" required></label>
+    <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
+    <label class="wide">Email<input name="email" type="email" autocomplete="email"></label>
+    <input type="hidden" name="business" value="">
+    <div class="hp" aria-hidden="true"><label>Leave blank<input name="botcheck" tabindex="-1" autocomplete="off"></label></div>
+    <button class="btn wide" type="submit">Send quote request</button>
+    <p class="form-status wide" role="status" aria-live="polite"></p>
+  </form>
+</dialog>
 </main>
 <footer class="site"><div class="wrap">
   <div class="foot">
