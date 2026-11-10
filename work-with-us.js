@@ -6,21 +6,22 @@
       key: 'Car detailing',
       title: 'Car detailing',
       summary: 'Interior detailing on-site at panel beaters and workshops.',
-      tasks: ['Vacuum, crevice clean, glass and dash', 'Fabric & leather conditioning, odour treatment', 'Hot water extraction and stain treatment'],
+      tasks: ['Vacuum, crevice clean, glass and dash', 'Fabric & leather conditioning', 'Hot water extraction and stain treatment'],
     },
     {
-      key: 'Steam cleaning (carpet, upholstery, mattress)',
-      title: 'Steam cleaning',
-      summary: 'Carpet, upholstery and mattress steam cleaning in apartment buildings and furnished units.',
-      tasks: ['Hot water extraction on carpet', 'Lounges, chairs and soft furnishings', 'Mattresses'],
+      key: 'Residential cleaning & organising',
+      title: 'Residential',
+      summary: 'Tidying and cleaning, home and wardrobe organising, end of lease and steam cleaning.',
+      tasks: ['Top-to-bottom home cleaning', 'Home & wardrobe organising', 'Carpet, upholstery & mattress steam cleaning'],
     },
     {
-      key: 'Appliance cleaning (washers & dryers)',
-      title: 'Appliance cleaning',
-      summary: 'Washing machine and dryer cleaning in homes and shared building laundries.',
-      tasks: ['Drum, door seal, drawer and filter cleaning', 'Dryer lint filter and housing', 'Working respectfully inside people’s homes'],
+      key: 'Appliance upkeep',
+      title: 'Appliance upkeep',
+      summary: 'Professional cleaning of washing machines, dryers and kitchen appliances in homes.',
+      tasks: ['Washing machine & dryer cleaning', 'Dishwasher, oven & microwave', 'Robot vacuum servicing clean'],
     },
   ];
+
 
   var grid = document.getElementById('jobs');
   grid.innerHTML = AREAS.map(function (r) {

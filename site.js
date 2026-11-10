@@ -33,6 +33,7 @@ document.querySelectorAll('form[data-enquiry]').forEach(function (form) {
     var data = new FormData(form);
     var payload = { type: 'enquiry', page: location.pathname };
     ['business', 'name', 'phone', 'email', 'sector', 'suburb', 'message'].forEach(function (k) { payload[k] = data.get(k) || ''; });
+    if (!payload.business.trim()) payload.business = 'Household: ' + payload.name; // sheet needs a business column value
 
     button.disabled = true;
     button.textContent = 'Sending…';
@@ -55,3 +56,17 @@ document.querySelectorAll('form[data-enquiry]').forEach(function (form) {
       });
   });
 });
+
+// Preselect the service in the form: contact.html?service=appliance, or links with data-pick="appliance"
+(function () {
+  function pick(key) {
+    document.querySelectorAll('form[data-enquiry] select[name="sector"] option').forEach(function (o) {
+      if (o.dataset.key === key) o.selected = true;
+    });
+  }
+  var q = new URLSearchParams(location.search).get('service');
+  if (q) pick(q);
+  document.querySelectorAll('[data-pick]').forEach(function (a) {
+    a.addEventListener('click', function () { pick(a.dataset.pick); });
+  });
+})();
