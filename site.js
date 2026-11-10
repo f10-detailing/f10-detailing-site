@@ -33,6 +33,11 @@ document.querySelectorAll('form[data-enquiry]').forEach(function (form) {
     var data = new FormData(form);
     var payload = { type: 'enquiry', page: location.pathname };
     ['business', 'name', 'phone', 'email', 'sector', 'suburb', 'message'].forEach(function (k) { payload[k] = data.get(k) || ''; });
+    if (!payload.business.trim()) payload.business = 'Household: ' + payload.name; // sheet needs a business column value
+    var extras = [].map.call(form.querySelectorAll('[data-extra]'), function (el) {
+      return el.value ? el.dataset.extra + ': ' + el.value : '';
+    }).filter(Boolean);
+    if (extras.length) payload.message = extras.join(' · ') + '\n' + payload.message;
 
     button.disabled = true;
     button.textContent = 'Sending…';
@@ -55,3 +60,35 @@ document.querySelectorAll('form[data-enquiry]').forEach(function (form) {
       });
   });
 });
+
+// Preselect the service in the form: contact.html?service=appliance, or links with data-pick="appliance"
+(function () {
+  function pick(key) {
+    document.querySelectorAll('form[data-enquiry] select[name="sector"] option').forEach(function (o) {
+      if (o.dataset.key === key) o.selected = true;
+    });
+  }
+  var q = new URLSearchParams(location.search).get('service');
+  if (q) pick(q);
+  document.querySelectorAll('[data-pick]').forEach(function (a) {
+    a.addEventListener('click', function () { pick(a.dataset.pick); });
+  });
+})();
+
+// Free-quote dialog (residential): buttons with data-service open it with the service preselected
+(function () {
+  var dlg = document.getElementById('res-quote');
+  if (!dlg || !dlg.showModal) return;
+  var sel = dlg.querySelector('select[name="sector"]');
+  document.querySelectorAll('.quote-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var want = b.dataset.service ? 'Residential: ' + b.dataset.service : '';
+      sel.value = '';
+      [].forEach.call(sel.options, function (o) { if (want && o.textContent === want) sel.value = o.value || o.textContent; });
+      dlg.showModal();
+      (want ? dlg.querySelector('input[name="suburb"]') : sel).focus();
+    });
+  });
+  dlg.querySelector('[data-close]').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+})();
