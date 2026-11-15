@@ -60,7 +60,7 @@ img,svg{display:block;max-width:100%;}
 header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px;}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.brand .mark{width:42px;height:42px;border-radius:10px;background:var(--blue);color:var(--yellow);display:grid;place-items:center;font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;}
+.brand .mark{width:54px;height:54px;margin:-6px -6px -6px -8px;flex:none;display:block;filter:drop-shadow(0 2px 3px rgba(28,78,166,.25));}
 .brand-txt{font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;color:var(--blue);line-height:1.1;}
 .brand-txt small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.02em;}
 .nav ul{display:flex;gap:26px;list-style:none;align-items:center;}
